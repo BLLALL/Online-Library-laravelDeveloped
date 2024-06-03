@@ -9,16 +9,23 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\authenticated;
 
-Route::get('/home', [BookController::class, 'index']);
-Route::get('/books/{book}', [BookController::class, 'show']);
-Route::get('/download/{book}', [BookController::class, 'download']);
-Route::get('/preview/{book}', [BookController::class, 'preview']);
+Route::controller(BookController::class)->group(function () {
+    Route::get('/home', 'index');
+    Route::get('/books/{book}', 'show');
+    Route::get('/download/{book}', 'download');
+    Route::get('/preview/{book}', 'preview');
+});
 
-Route::get('/authors', [AuthorController::class, 'index']);
-Route::get('/authors/{author}', [AuthorController::class, 'show']);
+Route::controller(AuthorController::class)->group(function () {
+    Route::get('/authors', 'index');
+    Route::get('/authors/{author}', 'show');
+});
 
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{category}', [CategoryController::class, 'show']);
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/categories', 'index');
+    Route::get('/categories/{category}', 'show');
+});
+
 
 Route::controller(SessionController::class)->group(function () {
     Route::get('/signIn', 'create');
@@ -26,13 +33,18 @@ Route::controller(SessionController::class)->group(function () {
     Route::post('/logOut', 'destroy');
 });
 
-Route::get('/signUp', [RegisterController::class, 'create']);
-Route::post('/signUp', [RegisterController::class, 'store']);
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/signUp', 'create');
+    Route::post('/signUp', 'store');
+});
 
-Route::get('/account', [ProfileController::class, 'index'])->middleware(authenticated::class);
-Route::get('/accDetails', [ProfileController::class, 'edit'])->middleware(authenticated::class);
-Route::post('/update', [ProfileController::class, 'update'])->middleware(authenticated::class);
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/account', 'index')->middleware(authenticated::class);
+    Route::get('/accDetails', 'edit')->middleware(authenticated::class);
+    Route::post('/update', 'update')->middleware(authenticated::class);
+});
 
-Route::get('/bookstore', [BookController::class, 'bookstore'])->middleware(authenticated::class);
+
+//Route::get('/bookstore',  'bookstore')->middleware(authenticated::class);
 
 require __DIR__ . '/auth.php';
