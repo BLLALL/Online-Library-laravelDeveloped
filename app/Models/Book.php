@@ -17,7 +17,6 @@ class Book extends Model
     public function scopeFilter($query, $filters) {
         $query->when($filters['search'] ?? null, fn ($query, $search) =>
             $query->where('title', 'like', '%' . $search . '%')
-            ->orWhere('description', 'like', '%' . $search . '%')
         );
 
     }

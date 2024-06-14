@@ -1,14 +1,23 @@
-<aside>
-    <h1 class="lable">أقسام الكتب</h1>
+<?php
+$authors = \App\Models\Author::get();
+$categories = \App\Models\Category::get()->unique();
+?>
+<style>
+
+</style>
+<aside class="book-sections">
+    <h1 class="">أقسام الكتب</h1>
     <ul>
-        @foreach($books as $book)
-            <li><a href="/categories/{{ $book->category->id }}">{{ $book->category->name }}</a></li>
+        @foreach($categories as $category)
+             @if(!ctype_alpha($category->name))
+                <li><a href="/categories/{{ $category->id }}">{{ $category->name }}</a></li>
+            @endif
         @endforeach
     </ul>
-    <h1 class="lable">المؤلفين</h1>
+    <h1 class="author-item">المؤلفين</h1>
     <ul>
-        @foreach($books as $book)
-            <li><a href="/authors/{{ $book->author->id }}">{{ $book->author->name }}</a></li>
+        @foreach($authors as $author)
+            <li><a href="/authors/{{ $author->id }}">{{ $author->name }}</a></li>
         @endforeach
     </ul>
 </aside>

@@ -11,33 +11,37 @@
             <!-- Search -->
             <div class="search">
                 <form method="GET" action="/home">
-                    <input type="text" name ="search" placeholder="البحث عن اسم كتاب او مؤلف" value="{{ request('search') }}">
+                    <input type="text" name="search" placeholder="البحث عن اسم كتاب او مؤلف"
+                           value="{{ request('search') }}">
                     <button type="submit">
                         <i class="fa-solid fa-magnifying-glass srch "></i>
                     </button>
                 </form>
             </div>
         </div>
-
     </div>
+
     <div class="content">
-        <div class="container">
-            <x-sidebar :books="$books"/>
-            <div class="all">
-                <div class="newadd">
+        <div class="container d-flex">
+            @if(!request('search'))
+                <x-sidebar/>
+            @endif
+            <div class="all flex-grow-1">
+                <div class="newadd  text-right">
                     <h2>
                         المضاف حديثا
                     </h2>
                     @if($books->count())
-                        <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-4 ms-2 mt-1">
+                        <div
+                            class="row row-cols-1 row-cols-lg-{{  4 }} row-cols-md-2 row-cols-sm-1 g-4 ms-2 mt-1">
                             @foreach($books as $book)
-                                <div class="col">
+                                <div class="col  text-right">
 
                                     <div class="card one">
                                         <a href="books/{{ $book->id }}" class="text-decoration-none text-black">
                                             <img
-                                                src="./images/{{ $book->bookCover ?? 'الشوقيات.jpg' }}"
-                                                class="card-img-top"
+                                                src="./images/{{ $book->bookCover ?? 'الماجريات.jpg' }}"
+                                                class="w-full h-auto max-w-full max-h-full object-cover"
                                                 alt="{{ $book->title }}">
                                         </a>
                                         <div class="card-body">
@@ -59,7 +63,7 @@
 
                         </div>
                     @else
-                        <p class="text-center py-1.5">لا يوجد كتب حتى الان من فضلك أعد المحاولة في وقت لاحق.</p>
+                        <p class="text-center py-1.5">لم نجد شيئا يوافق بحثك</p>
                     @endif
                 </div>
 
