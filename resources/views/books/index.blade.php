@@ -1,13 +1,15 @@
+@php use Illuminate\Support\Facades\DB; @endphp
 <title>اقرأ</title>
 <x-layout>
     <link rel="stylesheet" href="CSS/style.css">
     <header>
         <x-nav/>
     </header>
+
     <div class="desc">
         <div class="container">
             <p> موقع عربي متكامل لقراءه وتحميل الكتب</p>
-            <p class="tst"> وامكانية شراء الكتب الورقيه</p>
+
             <!-- Search -->
             <div class="search">
                 <form method="GET" action="/home">
@@ -55,6 +57,24 @@
                                                     {{ $book->author->name }}
                                                 </p>
                                             </a>
+                                            {{-- !!!!!! زرار الfav المفروض يبقى في صفحة الكتاب من جوه --}}
+                                                <?php
+                                                $isFav = DB::table('f_books')->
+                                                where('user_id', auth()->user()->id)->
+                                                where('book_id', $book->id)->exists()
+                                                ?>
+                                            <div x-data="{
+                                                favorite: {{ $isFav ? 'true' : 'false' }},
+                                                userId: {{ auth()->user()->id }},
+                                                bookId: {{ $book->id }},
+                                                message: ''
+                                            }">
+                                                <i id="fav" style="color: red;"
+                                                   :class="favorite ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
+                                                   @click="toggleFavorite"
+                                                   >
+                                                </i>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -74,4 +94,22 @@
     <x-flash/>
     <x-footer/>
 
+    <script>
+        function toggleFavorite() {
+            this.favorite = !this.favorite;
+            const url = this.favorite ? '/api/favorite' : '/api/unfavorite';
+            const successMessage = this.favorite ? 'الكتاب أضيف إلى كتبك المفضلة' : 'الكتاب حذف من كتبك المفضلة';
+
+            axios.post(url, {
+                user_id: this.userId,
+                book_id: this.bookId
+            }).then(response => {
+                this.message = successMessage;
+                console.log(response.data.message);
+            }).catch(error => {
+                console.error(error);
+                // Optionally revert the UI change on error
+                this.favorite = !this.favorite;
+            });
+        }    </script>
 </x-layout>

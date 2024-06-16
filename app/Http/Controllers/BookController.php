@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\FBooks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +12,8 @@ class BookController extends Controller
     public function index()
     {
         return view('books.index', [
-            'books' => Book::latest()->filter(request(['search']))->get()
+            'books' => Book::latest()->filter(request(['search']))->get(),
+
         ]);
     }
 
@@ -41,6 +43,5 @@ class BookController extends Controller
             'books' => Book::where('price', '>', 0)->latest()->get()
         ]);
      }
-
 
 }

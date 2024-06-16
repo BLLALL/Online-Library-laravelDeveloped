@@ -38,7 +38,7 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/signUp', 'store');
 });
 
-Route::controller(RegisterController::class)->group(function () {
+Route::controller(ProfileController::class)->group(function () {
     Route::get('/account', 'index')->middleware(authenticated::class);
     Route::get('/accDetails', 'edit')->middleware(authenticated::class);
     Route::post('/update', 'update')->middleware(authenticated::class);

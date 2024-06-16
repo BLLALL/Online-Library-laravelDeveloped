@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Pluralizer;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
