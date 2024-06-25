@@ -16,6 +16,11 @@ return new class extends Migration {
             $table->primary(['user_id', 'book_id']);
             $table->timestamps();
         });
+
+        Schema::table('f_books', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+        });
     }
 
     /**

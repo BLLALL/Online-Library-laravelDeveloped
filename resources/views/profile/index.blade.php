@@ -13,7 +13,7 @@
             </div>
             <div class="btns">
                 <button x-on:click="{{ redirect('/accDetails') }}"><a href="/accDetails">بيانات حسابي</a><i class="fa-solid fa-user sp"></i></button>
-                <button><a href="/favourites">مفضلاتي</a><i class="fa-solid fa-heart sp"></i></button>
+                <button><a href="/f_books">مفضلاتي</a><i class="fa-solid fa-heart sp"></i></button>
             </div>
         </section>
     </div>

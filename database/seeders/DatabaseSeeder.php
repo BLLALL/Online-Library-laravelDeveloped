@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Book;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+         User::factory()->create(
+             [
+                 'name' => 'Salah El-Din',
+                 'email' => 'saloh@gmail.com',
+                 'password' => Hash::make('salah12')
+             ]
+         );
 
         $author = Author::factory()->create([
             'name' => 'أحمد شوقي',

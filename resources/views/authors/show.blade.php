@@ -28,7 +28,7 @@
     <div class="container">
         <div class="card_details">
             <div class="photo_author">
-                <img src="/images/{{ $author->author_photo ?? "ليس له صورة.png" }}" alt="photo_author">
+                <img src="{{ Storage::url($author->author_photo) ?? "./images/ليس له صورة.png" }}" alt="photo_author">
             </div>
             <div class="all_details">
                 <p class="name_author">{{ $author->name }}</p>
@@ -50,7 +50,7 @@
                     <div class="col card_1">
                         <a href="/books/ {{ $book->id }}" class="text-decoration-none">
                             <div class="card one">
-                                <img class="img1" src="/images/{{ $book->bookCover ?? "fr.png" }}" class="card-img-top"
+                                <img class="img1" src="{{ Storage::url($book->bookCover) ?? "/images/fr.png" }}" class="card-img-top"
                                      alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title book-name">{{ $book->title }}</h5>

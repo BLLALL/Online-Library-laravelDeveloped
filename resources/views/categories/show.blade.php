@@ -19,13 +19,13 @@
                         <div class="col">
                             <div class="card">
                                 <a href="/authors/{{ $book->id }}"><img
-                                        src="/images/{{ $book->bookCover ?? "بلاد ما بين النهرين.jpg"}}" class="card-img-top"
+                                        src="{{ Storage::url($book->bookCover) ?? "بلاد ما بين النهرين./images/jpg"}}" class="card-img-top"
                                         alt="{{ $book->title }}"></a>
                                 <div class="card-body">
-                                    <a href="/authors/{{ $book->author->id }}"
+                                    <a href="/authors/{{ $book->id }}"
                                        class="text-decoration-none text-black"
                                     >
-                                        <h5 class="card-title">{{ $book->author->name }}</h5>
+                                        <h5 class="card-title">{{ $book->title }}</h5>
                                     </a>
                                 </div>
                             </div>

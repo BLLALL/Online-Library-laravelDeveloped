@@ -44,7 +44,7 @@
               </span>
             </div>
           </span>
-                    <img src="/images/{{ $book->bookCover ?? 'الشوقيات.jpg'}}" alt="Ekadolly">
+                    <img src="{{ Storage::url( $book->bookCover) ?? '/images/الشوقيات.jpg'}}" alt="Ekadolly">
                 </div>
             </div>
         </div>

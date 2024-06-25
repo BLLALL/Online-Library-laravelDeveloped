@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Book;
+use App\Models\FBooks;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,6 +34,13 @@ class ProfileController extends Controller
         return view('profile.update', ['user' => $request->user()]);
     }
 
+    public function favorites(Request $request)
+    {
+
+        $favbooks = Book::whereIn('id', FBooks::where('user_id', $request->user()->id)->pluck('book_id'))->get();
+
+        return view('profile.fav', ['favbooks' => $favbooks ]);
+    }
 
     public function update()
     {

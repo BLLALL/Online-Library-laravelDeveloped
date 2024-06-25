@@ -1,4 +1,4 @@
-<title>بيانات الحساب</title>
+<title>بيانات حسابي</title>
 <x-layout>
     <link rel="stylesheet" href="/CSS/profile.css">
     <div class="all">
@@ -9,9 +9,9 @@
             <div class="details">
                 <h1>بياناتي</h1>
                 <p> : اسم المستخدم </p>
-                <p> {{ $user->name }}</p>
+                <p> {{ $user->name }} </p>
                 <p> : البريد الالكتروني </p>
-                <p> {{ $user->email }}</p>
+                <p> {{ $user->email }} </p>
             </div>
             <button class="clkchg" onclick="displayChg()">تعديل البيانات</button>
             <div class="changeDetails">

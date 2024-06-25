@@ -28,8 +28,8 @@
                     <div class="col">
                         <div class="card">
                             <a href="categories/{{ $category->id }}"><img
-                                    src="./images/{{ $category->category_photo ?? "الادب العربي.jpg"}}"
-                                    class="card-img-top" alt="..."></a>
+                                    src="{{ Storage::url($category->category_photo) ?? "الادب العربي.jpg"}}"
+                                    class="card-img-top" alt="{{ $category->name }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title book-name"><a class="text-decoration-none text-black"
                                                                     href="categories/{{ $category->id }}"> {{ $category->name }} </a>

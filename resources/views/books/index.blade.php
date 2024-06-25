@@ -35,14 +35,14 @@
                     </h2>
                     @if($books->count())
                         <div
-                            class="row row-cols-1 row-cols-lg-{{  4 }} row-cols-md-2 row-cols-sm-1 g-4 ms-2 mt-1">
+                            class="row row-cols-1 row-cols-lg-{{ min($books->count(), 4) }} row-cols-md-2 row-cols-sm-1 g-4 ms-2 mt-1">
                             @foreach($books as $book)
-                                <div class="col  text-right">
+                                <div class="col text-right">
 
-                                    <div class="card one">
+                                    <div class="card one display: inline">
                                         <a href="books/{{ $book->id }}" class="text-decoration-none text-black">
                                             <img
-                                                src="./images/{{ $book->bookCover ?? 'الماجريات.jpg' }}"
+                                                src="{{ Storage::url($book->bookCover) ?? './images/الماجريات.jpg' }}"
                                                 class="w-full h-auto max-w-full max-h-full object-cover"
                                                 alt="{{ $book->title }}">
                                         </a>
@@ -57,25 +57,27 @@
                                                     {{ $book->author->name }}
                                                 </p>
                                             </a>
-                                            {{-- !!!!!! زرار الfav المفروض يبقى في صفحة الكتاب من جوه --}}
-                                                <?php
-                                                $isFav = DB::table('f_books')->
-                                                where('user_id', auth()->user()->id)->
-                                                where('book_id', $book->id)->exists()
-                                                ?>
-                                            <div x-data="{
+
+                                            @auth
+                                                {{-- !!!!!! زرار الfav المفروض يبقى في صفحة الكتاب من جوه --}}
+                                                    <?php
+                                                    $isFav = DB::table('f_books')->
+                                                    where('user_id', auth()->user()->id)->
+                                                    where('book_id', $book->id)->exists()
+                                                    ?>
+                                                <div x-data="{
                                                 favorite: {{ $isFav ? 'true' : 'false' }},
                                                 userId: {{ auth()->user()->id }},
                                                 bookId: {{ $book->id }},
                                                 message: ''
                                             }">
-                                                <i id="fav" style="color: red;"
-                                                   :class="favorite ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
-                                                   @click="toggleFavorite"
-                                                   >
-                                                </i>
-                                            </div>
-
+                                                    <i id="fav" style="color: red;"
+                                                       :class="favorite ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
+                                                       @click="toggleFavorite"
+                                                    >
+                                                    </i>
+                                                </div>
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>
@@ -111,5 +113,6 @@
                 // Optionally revert the UI change on error
                 this.favorite = !this.favorite;
             });
-        }    </script>
+        }
+    </script>
 </x-layout>

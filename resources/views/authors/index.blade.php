@@ -19,7 +19,7 @@
                         <div class="col">
                             <div class="card">
                                 <a href="authors/{{ $author->id }}"><img
-                                        src="./images/{{ $author->author_photo ?? 'هتلر.jpg' }}" class="card-img-top"
+                                        src="{{ Storage::url( $author->author_photo) ?? './images/أحمد شلبي.jpg'}}" class="card-img-top"
                                         alt="{{ $author->name }}"></a>
                                 <div class="card-body">
                                     <a href="/authors/{{ $author->id }}"
@@ -38,7 +38,6 @@
             @endif
 
         </div>
-    </div>
     </div>
 
     @if($authors->count())
