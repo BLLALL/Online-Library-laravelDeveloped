@@ -18,11 +18,11 @@
 
                         <div class="col">
                             <div class="card">
-                                <a href="/authors/{{ $book->id }}"><img
+                                <a href="/books/{{ $book->id }}"><img
                                         src="{{ Storage::url($book->bookCover) ?? "بلاد ما بين النهرين./images/jpg"}}" class="card-img-top"
                                         alt="{{ $book->title }}"></a>
                                 <div class="card-body">
-                                    <a href="/authors/{{ $book->id }}"
+                                    <a href="/books/{{ $book->id }}"
                                        class="text-decoration-none text-black"
                                     >
                                         <h5 class="card-title">{{ $book->title }}</h5>
