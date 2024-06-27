@@ -1,6 +1,7 @@
 # اقرأ - Online Book Reading and Download Platform
 
-اقرأ is a web application that allows users to browse, read, and download books. It features user authentication, book management, and an admin panel for content management.
+
+ this web application allows users to browse, read, and download books. It features user authentication, book management, and an admin panel for content management.
 
 ## Features
 
